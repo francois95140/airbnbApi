@@ -2,6 +2,8 @@ package com.example.airbnb.controller;
 
 import com.example.airbnb.modele.Property;
 import com.example.airbnb.service.PropertyService;
+import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,19 +11,18 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("property")
+@AllArgsConstructor()
 public class PropertyController {
 
 
     private final PropertyService propertyService;
 
-    public PropertyController(PropertyService propertyService) {
-        this.propertyService = propertyService;
-    }
+
 
     @PostMapping("/create")
-    public Property creat (@RequestBody Property property){
+    public Property create (@RequestBody Property property){
         System.out.println(property);
-        return propertyService.creat(property);
+        return propertyService.create(property);
     }
 
     @GetMapping()
@@ -29,7 +30,13 @@ public class PropertyController {
         return propertyService.propertyList();
     }
 
-    public String delet (@PathVariable UUID id){
-        return propertyService.delet(id);
+    @PutMapping("/update/{id}")
+    public Property update (@PathVariable UUID id, @RequestBody Property property){
+        return propertyService.update(id, property);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete (@PathVariable UUID id){
+        return propertyService.delete(id);
     }
 }

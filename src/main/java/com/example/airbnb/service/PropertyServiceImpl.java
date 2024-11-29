@@ -9,18 +9,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class PropertyServiceImpl implements PropertyService {
 
     private final PropertyRepository propertyRepository;
 
-    public PropertyServiceImpl(PropertyRepository propertyRepository) {
-        this.propertyRepository = propertyRepository;
-    }
-
 
     @Override
-    public Property creat(Property property) {
-        System.out.println("pop pop reta");
+    public Property create(Property property) {
         return propertyRepository.save(property);
     }
 
@@ -31,17 +27,16 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Property update(UUID id, Property property) {
-//        return propertyRepository.findById(id).map(propertyRes-> {
-//                    propertyRes.setPrice(property.getPrice());
-//                    propertyRes.setName(property.getName());
-//                    propertyRes.setDescription(property.getDescription());
-//            return null;
-//        }).orElseThrow(() -> new RuntimeException("Property not fund !!"));
-        return null;
+        return propertyRepository.findById(id).map(propertyRes -> {
+            propertyRes.setPricePerNight(property.getPricePerNight());
+            propertyRes.setName(property.getName());
+            propertyRes.setDescription(property.getDescription());
+            return propertyRepository.save(propertyRes);
+        }).orElseThrow(() -> new RuntimeException("Property not fund !!"));
     }
 
     @Override
-    public String delet(UUID id) {
+    public String delete(UUID id) {
         propertyRepository.deleteById(id);
         return "Property deleted ";
     }

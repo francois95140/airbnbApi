@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PropertyService {
-    Property creat (Property property);
+    Property create(Property property);
 
     List<Property> propertyList();
 
     Property update (UUID id,Property property);
 
-    String delet (UUID id);
+    String delete (UUID id);
 }

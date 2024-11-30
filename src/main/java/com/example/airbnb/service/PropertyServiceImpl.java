@@ -3,9 +3,10 @@ package com.example.airbnb.service;
 import com.example.airbnb.modele.Property;
 import com.example.airbnb.repository.PropertyRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,8 +22,8 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<Property> propertyList() {
-        return propertyRepository.findAll();
+    public Page<Property> propertyList(Pageable pageable) {
+        return propertyRepository.findAll(pageable);
     }
 
     @Override

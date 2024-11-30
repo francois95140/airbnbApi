@@ -3,7 +3,9 @@ package com.example.airbnb.controller;
 import com.example.airbnb.modele.Property;
 import com.example.airbnb.service.PropertyService;
 import lombok.AllArgsConstructor;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,8 +28,12 @@ public class PropertyController {
     }
 
     @GetMapping()
-    public List<Property> allProperty(){
-        return propertyService.propertyList();
+    public Page<Property> allProperty(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size
+    ){
+        Pageable pageable = PageRequest.of(page, size);
+        return propertyService.propertyList(pageable);
     }
 
     @PutMapping("/update/{id}")

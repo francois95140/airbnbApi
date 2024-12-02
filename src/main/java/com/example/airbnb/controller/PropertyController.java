@@ -41,6 +41,11 @@ public class PropertyController {
         return propertyService.update(id, property);
     }
 
+    @GetMapping("/{id}")
+    public Property getOne (@PathVariable UUID id){
+        return propertyService.getOne(id);
+    }
+
     @DeleteMapping("/delete/{id}")
     public String delete (@PathVariable UUID id){
         return propertyService.delete(id);

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,6 +36,12 @@ public class PropertyServiceImpl implements PropertyService {
             return propertyRepository.save(propertyRes);
         }).orElseThrow(() -> new RuntimeException("Property not fund !!"));
     }
+
+    @Override
+    public Property getOne(UUID id) {
+        return propertyRepository.findById(id).orElseThrow(() -> new RuntimeException("Property not fund !!"));
+    }
+
 
     @Override
     public String delete(UUID id) {

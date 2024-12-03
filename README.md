@@ -49,4 +49,10 @@ L'objectif est de construire un système robuste pour la gestion des propriété
 
 ---
 
-## Structure du projet
+## Structure du projet 
+```plaintext
+src/main/java/com/example/airbnb
+├── controller    # Contient les contrôleurs API (points d'entrée REST)
+├── modele        # Contient les entités JPA représentant les tables de la BDD
+├── repository    # Interfaces Spring Data JPA pour la communication avec la BDD
+└── service       # Contient la logique métier (services)
